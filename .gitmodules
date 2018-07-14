@@ -1,0 +1,6 @@
+[submodule "ryabko/lhc_generator"]
+	path = ryabko/lhc_generator
+	url = https://github.com/7HAL32/lhc_generator.git
+[submodule "lhc_generator"]
+	path = lhc_generator
+	url = https://github.com/7HAL32/lhc_generator.git

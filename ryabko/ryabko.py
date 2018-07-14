@@ -44,7 +44,6 @@ def decode(v):
     return secret
 
 def main():
-
     seq = input("Input seq: ")
     n = int(input("Input n: "))
     sec = input("Input secret: ")
@@ -79,7 +78,6 @@ def main():
 
     #dec = decode(enc[0])
     #print("Decoded = ", dec)
-
 
 if __name__ == "__main__":
     main()
