@@ -2,6 +2,7 @@ import sys
 import cv2
 import numpy as np
 import ryabko
+import random
 
 def get_pixels(png_path, color):
     mask = np.uint8(1)
@@ -42,7 +43,7 @@ def ryabko_encode(bit_seq_str, secret_str, chunk):
     if i <= len(bit_seq_str):
         outseq += bit_seq_str[len(outseq):]
 
-    return ''.join(outseq)
+    return (''.join(outseq), j)
 
 def ryabko_decode(bit_seq_str, chunk):
     i = chunk
@@ -63,11 +64,20 @@ def ryabko_decode(bit_seq_str, chunk):
     return ''.join(outseq)
 
 if __name__ == "__main__":
-    r_list = list(get_pixels(sys.argv[1], 0))
-    g_list = list(get_pixels(sys.argv[1], 2))
+    op_type  = sys.argv[1]
+    img_path = sys.argv[2]
+    chunk    = int(sys.argv[3])
+    randBinList = lambda n: [random.randint(0,1) for b in range(1,n+1)]
 
+    r_list = list(get_pixels(img_path, 0))
     r_str = ''.join(str(i) for i in r_list)
-
-    out = ryabko_encode(r_str, "1010101010101", 8)
-
-    print (ryabko_decode(out, 8))
+        
+    if op_type == "-d":
+        decoded_seq = ryabko_decode(r_str, chunk)
+    elif op_type == "-e":
+        secret = ''.join(str(i) for i in randBinList(10000))
+        enc_seq, enc_bits = ryabko_encode(r_str, secret, chunk)
+        print ("Encoded bits:")
+        print (enc_bits)
+    else:
+        print("Invalid param")
