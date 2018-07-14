@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 from sympy.utilities.iterables import multiset_permutations
 
 def find_j(vec, s):
@@ -7,7 +6,7 @@ def find_j(vec, s):
     bs = format(len(s), "b")
     bi = format(ind, "b")
     bi = "0"*(len(bs) - len(bi)) + bi
-    print(bs, bi, ind)
+    #print(bs, bi, ind)
     j = 0
     while j < len(bi):
         if bi[j] != bs[j]:
@@ -19,17 +18,17 @@ def find_j(vec, s):
 def encode(u, secret):
     s = sorted(list(multiset_permutations(u)))
     ind = s.index(list(u))
-    print(s)
+    #print(s)
     j, bi = find_j(u, s)
     if (j == len(u)):
         return (u, 0)
     nb = len(bi) - j - 1
     bi = bi[:j+1]
-    print(bi)
+    #print(bi)
     bi += secret[0:nb]
-    print(bi, j)
+    #print(bi, j)
     v = s[int(bi, 2)]
-    print(v, secret)
+    #print(v, secret)
     return (v, nb)
 
 def hamming2(s1, s2):
@@ -81,4 +80,6 @@ def main():
     #dec = decode(enc[0])
     #print("Decoded = ", dec)
 
-main()
+
+if __name__ == "__main__":
+    main()
